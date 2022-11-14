@@ -62,12 +62,12 @@ public class ShowFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
-        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
-        HomeArticleAdapter adapter = new HomeArticleAdapter(homeArticleList);
-        recyclerView.setAdapter(adapter);
+//        RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+//        recyclerView.setLayoutManager(layoutManager);
+//        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(),DividerItemDecoration.VERTICAL));
+//        HomeArticleAdapter adapter = new HomeArticleAdapter(homeArticleList);
+//        recyclerView.setAdapter(adapter);
 //        view.<TextView>findViewById(R.id.tv_show)
 //                .setText(((ArrayList<TreeModel.DataBean.ChildrenBean>) getArguments()
 //                .getSerializable("color")).get(getArguments().getInt("item")).getName());
