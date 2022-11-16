@@ -31,7 +31,7 @@
             android:id="@+id/rb_home"
             style="@style/tab_menu_item"
             android:drawableTop="@drawable/tab_menu_home"
-            android:text="测试" />
+            android:text="@string/home" />
 
         <RadioButton
             android:id="@+id/rb_tree"
