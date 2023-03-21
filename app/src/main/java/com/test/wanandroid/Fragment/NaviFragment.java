@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -43,15 +44,18 @@ public class NaviFragment extends Fragment implements ITreeView {
     private List<NaviModel.DataBean> treeList = new ArrayList<>();
     private RecyclerView recyclerView;
     private NaviAdapter adapter;
+    private ProgressBar progressBar;
 
 
     private Handler handler = new Handler(){
         public void handleMessage(Message message){
             switch (message.what){
                 case ERROR:
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getActivity(), "获取失败", Toast.LENGTH_SHORT).show();
                     break;
                 case SUCCESS:
+                    progressBar.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                     break;
                 default:
@@ -69,6 +73,7 @@ public class NaviFragment extends Fragment implements ITreeView {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_navi,container,false);
 
+        progressBar = view.findViewById(R.id.progress_bar_navi);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView = view.findViewById(R.id.navi_recycler_view);

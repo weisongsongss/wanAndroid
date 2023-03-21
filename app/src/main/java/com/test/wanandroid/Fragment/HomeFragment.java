@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -62,6 +63,7 @@ public class HomeFragment extends Fragment implements IHomeBannerView , IHomeArt
     private static final int LOGIN_SUCCESS = 0;
     Context context = getContext();
     private static final String TAG = "HomeFragment";
+    private ProgressBar progressBar;
     IHomeBannerPresenter homePresenter;
     IHomeArticlePresenter homeArticlePresenter;
     BannerModel bannerModel;
@@ -85,9 +87,11 @@ public class HomeFragment extends Fragment implements IHomeBannerView , IHomeArt
         public void handleMessage(Message message){
             switch (message.what){
                 case LOGIN_ERROR:
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getActivity(), "文章获取失败", Toast.LENGTH_SHORT).show();
                     break;
                 case LOGIN_SUCCESS:
+                    progressBar.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                     swipeRefreshLayout.setRefreshing(false);
                     break;
@@ -103,6 +107,7 @@ public class HomeFragment extends Fragment implements IHomeBannerView , IHomeArt
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home,container,false);
 
+        progressBar = view.findViewById(R.id.progress_bar_home);
         //首页轮播图
         homePresenter = new HomeBanner(this);
 //        homePresenter.getBanner();//网络获取首页轮播图的图片，直接用glide的话，以下代码就可以，但是实际项目中肯定会有替换图片的情况，所以写了一个网络请求来备份

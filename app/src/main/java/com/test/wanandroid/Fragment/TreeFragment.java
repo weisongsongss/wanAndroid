@@ -7,26 +7,22 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
-import com.test.wanandroid.Adapter.HomeArticleAdapter;
 import com.test.wanandroid.Adapter.TreeAdapter;
 import com.test.wanandroid.Compl.TreeCompl;
 import com.test.wanandroid.Interface.ITreePresenter;
 import com.test.wanandroid.Interface.ITreeView;
-import com.test.wanandroid.Model.HomeArticleModel;
 import com.test.wanandroid.Model.TreeModel;
 import com.test.wanandroid.R;
-import com.test.wanandroid.databinding.FragmentTreeBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,15 +42,18 @@ public class TreeFragment extends Fragment implements ITreeView {
     private List<TreeModel.DataBean> treeList = new ArrayList<>();
     private RecyclerView recyclerView;
     private TreeAdapter adapter;
+    private ProgressBar progressBar;
 
 
     private Handler handler = new Handler(){
         public void handleMessage(Message message){
             switch (message.what){
                 case ERROR:
+                    progressBar.setVisibility(View.GONE);
                     Toast.makeText(getActivity(), "获取失败", Toast.LENGTH_SHORT).show();
                     break;
                 case SUCCESS:
+                    progressBar.setVisibility(View.GONE);
                     adapter.notifyDataSetChanged();
                     break;
                 default:
@@ -70,6 +69,8 @@ public class TreeFragment extends Fragment implements ITreeView {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tree,container,false);
+
+        progressBar = view.findViewById(R.id.progress_bar);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         recyclerView = view.findViewById(R.id.tree_recycler_view);
