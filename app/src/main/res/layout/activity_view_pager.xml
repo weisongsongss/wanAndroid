@@ -24,7 +24,6 @@
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorColor="#0371DD"
         app:tabRippleColor="@color/transparent"
-        app:tabSelectedTextColor="#0371DD"
         app:tabTextColor="#111111"
         android:layout_below="@+id/title"
         app:layout_constraintTop_toTopOf="parent"
